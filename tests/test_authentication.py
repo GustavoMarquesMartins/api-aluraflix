@@ -32,6 +32,12 @@ class AuthenticationUserTestCase(APITestCase):
     user = authenticate(username='c3po', password='1234566')
     self.assertFalse((user is not None) and user.is_authenticated) 
 
+  def test_requisicao_get_com_user_autenticado(self):
+    """Teste que verifica uma requisição GET para um usuário autenticado"""
+    self.client.force_authenticate(self.user)
+    resposta = self.client.get(self.lista_url)
+    self.assertEqual(resposta.status_code, status.HTTP_200_OK)
+
   def populando_banco_de_dados_para_teste(self):
     """Criando uma instância no banco de dados para ser usado nos métodos de teste"""
     self.user = User.objects.create_user(username="c3po", password='123456')
