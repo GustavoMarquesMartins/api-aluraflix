@@ -7,6 +7,8 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+
+# Configurações do swagger 
 schema_view = get_schema_view(
    openapi.Info(
       title="Aluraflix",
@@ -20,12 +22,15 @@ schema_view = get_schema_view(
    permission_classes=(permissions.AllowAny,),
 )
 
+# Usando o router para gerar urls para cada um dos endpoints
 router = routers.DefaultRouter()
 router.register('programas', ProgramaViewSet, basename='programas')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
+
+    # Urls de acesso a documentação feita pelo swagger
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]

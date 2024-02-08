@@ -1,17 +1,24 @@
 from rest_framework import viewsets, filters
-from aluraflix.serializers import ProgramaSerializer
-from aluraflix.models import Programa
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+from .serializers import ProgramaSerializer
+from .models import Programa
+
+
 class ProgramaViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet para manipulação de Programas.
+    """
     queryset = Programa.objects.all()
-    # print(str(queryset.query))
     serializer_class = ProgramaSerializer
+
+    # Configuração dos filtros
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    search_fields = ['titulo']
     filterset_fields = ['tipo']
+    search_fields = ['titulo']
+
+    # Configuração da autenticação e permissão
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
-

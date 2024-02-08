@@ -19,16 +19,21 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # apps padão do django  
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'django_filters',
+
+    # apps adicionais
+    'rest_framework', # django rest framework
+    'django_filters', # suporte a filtros
+    'drf_yasg', # swagger
+    
+    # Meus apps
     'aluraflix',
-    'drf_yasg',
 ]
 
 MIDDLEWARE = [
